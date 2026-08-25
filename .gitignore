@@ -10,3 +10,4 @@
 __pycache__/
 .venv/
 venv/
+careguard_audit.jsonl

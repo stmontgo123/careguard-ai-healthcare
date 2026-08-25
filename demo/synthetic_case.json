@@ -1,0 +1,11 @@
+{
+  "patient_id": "PAT-1001",
+  "encounter_id": "ENC-240817",
+  "synthetic_name": "Jordan Lee",
+  "question": "What is preventing discharge readiness right now?",
+  "expected_blockers": [
+    "home oxygen / equipment vendor confirmation",
+    "transportation confirmation"
+  ],
+  "safety_boundary": "Synthetic data only. No diagnosis, prescribing, medication change, or autonomous discharge."
+}

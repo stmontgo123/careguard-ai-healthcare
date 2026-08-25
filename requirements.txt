@@ -1,0 +1,6 @@
+oracledb>=2.2.1
+python-dotenv>=1.0.1
+requests>=2.32.0
+numpy>=1.26.0
+sentence-transformers>=3.0.0
+pydantic>=2.7.0
