@@ -1,0 +1,153 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-case-2026-0917",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "member-2048",
+        "meta": {"security": [{"system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality", "code": "RESTRICTED"}]},
+        "identifier": [{"system": "https://synthetic.example/member", "value": "MEM-2048"}],
+        "name": [{"text": "Maria Lopez"}],
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST", "UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "coverage-2048",
+        "meta": {"security": [{"code": "RESTRICTED"}, {"code": "PAYMENT"}]},
+        "status": "active",
+        "beneficiary": {"reference": "Patient/member-2048"},
+        "payor": [{"display": "Synthetic Health Plan"}],
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST", "UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "mri-order-73721",
+        "meta": {"security": [{"code": "RESTRICTED"}, {"code": "PAYMENT"}]},
+        "status": "completed",
+        "intent": "order",
+        "subject": {"reference": "Patient/member-2048"},
+        "code": {"coding": [{"system": "http://www.ama-assn.org/go/cpt", "code": "73721", "display": "MRI lower extremity joint without contrast"}]},
+        "authoredOn": "2026-08-01",
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST", "UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Claim",
+        "id": "claim-784291",
+        "meta": {"security": [{"code": "RESTRICTED"}, {"code": "PAYMENT"}]},
+        "status": "active",
+        "use": "claim",
+        "patient": {"reference": "Patient/member-2048"},
+        "insurance": [{"sequence": 1, "focal": true, "coverage": {"reference": "Coverage/coverage-2048"}}],
+        "item": [{"sequence": 1, "productOrService": {"coding": [{"code": "73722"}]}}],
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST", "UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-784291",
+        "meta": {"security": [{"code": "RESTRICTED"}, {"code": "PAYMENT"}]},
+        "status": "active",
+        "outcome": "error",
+        "request": {"reference": "Claim/claim-784291"},
+        "error": [{"code": {"coding": [{"system": "https://synthetic.example/adjustment-reason", "code": "CO-197"}]}}],
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST", "UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "auth-pa-55219",
+        "meta": {"security": [{"code": "RESTRICTED"}, {"code": "PAYMENT"}]},
+        "status": "current",
+        "subject": {"reference": "Patient/member-2048"},
+        "description": "Prior authorization PA-55219 approves CPT 73721 for 2026-08-14.",
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST", "UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "mri-report-full",
+        "meta": {"security": [{"code": "RESTRICTED"}, {"code": "TREATMENT"}]},
+        "status": "final",
+        "subject": {"reference": "Patient/member-2048"},
+        "conclusion": "Synthetic detailed clinical narrative not required for the payment exception.",
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["UTILIZATION_MANAGEMENT"],
+          "allowed_purposes": ["UTILIZATION_MANAGEMENT"]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "doc-sud-001",
+        "meta": {"security": [{"code": "HIGHLY_RESTRICTED"}, {"code": "SUD"}]},
+        "status": "current",
+        "description": "Synthetic Part 2-sensitive record unrelated to the claim exception.",
+        "_demo_access": {
+          "member_id": "MEM-2048",
+          "case_id": "CASE-2026-0917",
+          "allowed_roles": ["CLAIMS_SPECIALIST"],
+          "allowed_purposes": ["PAYMENT"],
+          "explicit_consent": false
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "coverage-other-member",
+        "meta": {"security": [{"code": "RESTRICTED"}]},
+        "status": "active",
+        "_demo_access": {
+          "member_id": "MEM-9999",
+          "case_id": "CASE-OTHER",
+          "allowed_roles": ["CLAIMS_SPECIALIST"],
+          "allowed_purposes": ["PAYMENT"]
+        }
+      }
+    }
+  ]
+}

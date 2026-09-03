@@ -1,0 +1,13 @@
+{
+  "case_id": "CASE-2026-0917",
+  "member_id": "MEM-2048",
+  "member_display": "Maria Lopez",
+  "claim_id": "CLM-784291",
+  "authorization_id": "PA-55219",
+  "service_date": "2026-08-14",
+  "submitted_cpt": "73722",
+  "authorized_cpt": "73721",
+  "denial_code": "CO-197",
+  "denial_reason": "Precertification or authorization absent",
+  "scenario_note": "Synthetic portfolio data only. The CPT mismatch is intentional."
+}

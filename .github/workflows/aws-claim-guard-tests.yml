@@ -1,0 +1,31 @@
+name: ClaimGuard AWS Security Tests
+
+on:
+  push:
+    branches: [main, aws-claim-guard]
+    paths:
+      - "platforms/aws/**"
+      - ".github/workflows/aws-claim-guard-tests.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "platforms/aws/**"
+      - ".github/workflows/aws-claim-guard-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-security-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run the no-cost security suite
+        working-directory: platforms/aws
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Run the deterministic demo
+        working-directory: platforms/aws
+        run: python -m src.cli --json
