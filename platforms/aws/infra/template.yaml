@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: ClaimGuard synthetic claim-denial demo - low-cost serverless baseline
+
+Parameters:
+  StageName:
+    Type: String
+    Default: demo
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Architectures: [arm64]
+    MemorySize: 256
+    Timeout: 10
+    Environment:
+      Variables:
+        MODEL_PROVIDER: deterministic
+
+Resources:
+  ClaimGuardApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref StageName
+
+  ClaimGuardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: infra.lambda_fn.handler.lambda_handler
+      Description: Synthetic ClaimGuard investigation endpoint
+      Events:
+        Investigate:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ClaimGuardApi
+            Path: /cases/{case_id}/investigate
+            Method: GET
+
+Outputs:
+  InvestigationEndpoint:
+    Description: Synthetic demo endpoint; do not send PHI/ePHI
+    Value: !Sub "https://${ClaimGuardApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${StageName}/cases/CASE-2026-0917/investigate"

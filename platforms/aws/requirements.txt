@@ -1,0 +1,4 @@
+# The deterministic CLI and security tests use only the Python standard library.
+# Optional application and AWS adapters:
+streamlit>=1.39,<2
+boto3>=1.35,<2
